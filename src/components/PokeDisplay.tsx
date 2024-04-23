@@ -5,6 +5,7 @@ export function TestComponent({ pokemon }) {
   useEffect(() => {
     console.log(pokemon);
   }, [pokemon]);
+
   return (
     <>
       <div>
@@ -30,11 +31,14 @@ export function TestComponent({ pokemon }) {
           >
             <Grid container spacing={1}>
               <Grid item md={2}>
-                {pokemon.name}
+                <h3>{pokemon.name}</h3>
               </Grid>
               <Grid item md={8}></Grid>
               <Grid item md={2}>
-                {pokemon.types}
+                <h3>Types:</h3>
+                {pokemon.types.map((item, index) => (
+                  <div key={index}>{item}</div>
+                ))}
               </Grid>
               <Box
                 component="img"
@@ -45,11 +49,14 @@ export function TestComponent({ pokemon }) {
                   maxHeight: { xs: 200, md: 200 },
                   maxWidth: { xs: 200, md: 200 },
                 }}
-                alt="The house from the offer."
-                src={pokemon.picture}
+                alt={pokemon.name}
+                src={pokemon.picture.sprites.front_default}
               />
               <Grid item md={12}>
-                Moves: {pokemon.moves}
+                Moves:
+                {pokemon.moves.map((item) => (
+                  <Box>{item}</Box>
+                ))}
               </Grid>
               <Grid item md={12}>
                 Weight: {pokemon.weight}
