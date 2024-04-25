@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Grid } from "@mui/material";
 import { TestComponent } from "./PokeDisplay";
 import { PokeDesc, Sprites } from "./Typing";
 
@@ -16,7 +16,6 @@ export function IdInput() {
 
   const [id, setId] = useState(1);
   const [b, setB] = useState(placeholder);
-  //const [errorState, setErrorState] = useState(false);
 
   const handleClick = async (ID: number) => {
     try {
@@ -30,7 +29,7 @@ export function IdInput() {
       }
 
       const minMoves = Math.min(data.moves.length, 4);
-      for (var i = 0; i < minMoves; i++) {
+      for (i = 0; i < minMoves; i++) {
         moves.push(data.moves[i].move.name);
       }
       const img: Sprites = {
@@ -77,31 +76,35 @@ export function IdInput() {
   if (b.name) {
     return (
       <>
-        <h1>Enter Pokemon Id Number:</h1>
-        <div>
-          <TextField
-            id="outlined-basic"
-            label="pokemon id"
-            variant="outlined"
-            value={id}
-            type="number"
-            onChange={(e) => {
-              setId(parseInt(e.target.value));
-            }}
-          />
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleClick(id);
-            }}
-            value={id}
-          >
-            Submit ID: {id}
-          </Button>
-        </div>
-        <div>
-          <TestComponent pokemon={b} />
-        </div>
+        <Grid justifyContent="center" alignItems="center">
+          <div>
+            <h1>Enter Pokemon Id Number:</h1>
+            <div>
+              <TextField
+                id="outlined-basic"
+                label="pokemon id"
+                variant="outlined"
+                value={id}
+                type="number"
+                onChange={(e) => {
+                  setId(parseInt(e.target.value));
+                }}
+              />
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleClick(id);
+                }}
+                value={id}
+              >
+                Submit ID: {id}
+              </Button>
+            </div>
+            <div>
+              <TestComponent pokemon={b} />
+            </div>
+          </div>
+        </Grid>
       </>
     );
   }
